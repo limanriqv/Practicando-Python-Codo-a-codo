@@ -35,3 +35,36 @@ def agregarTrabajador(listado):
   trabajador = {"nombre":nombre,"edad":edad, "dni":dni, "profesion":profesion, "activo":activo}
   listado.append(trabajador)
   agregarTrabajadorEnArchivo("trabajadores.dat",trabajador)
+
+
+def modificarTrabajador(listado,dni):
+  for trabajador in listado:
+    if trabajador["dni"] == dni:
+      print(trabajador)
+      nombre = input("Nombre(Presione enter para no modificar) ")
+      if nombre == '':
+        nombre=trabajador["nombre"]
+      edad = input("Edad(Presione enter para no modificar) ")  
+      if edad == '':
+        edad = trabajador["edad"]
+      dni = input("DNI(Presione enter para no modificar) ")
+      if dni == '':
+        dni = trabajador["dni"]
+      profesion = input("Profesion(Presione enter para no modificar) ")
+      if profesion == '':
+        profesion=trabajador["profesion"]
+      activo = input("Activo(Presione enter para no modificar) ")
+      if activo == '':
+        activo = trabajador["activo"]
+
+      # Modificar el trabajador del listado con los nuevos datos
+      trabajador["nombre"] = nombre
+      trabajador["edad"] = edad
+      trabajador["dni"]= dni
+      trabajador["Profesion"]=profesion
+      trabajador["Activo"]=activo
+      
+    
+
+
+ 
