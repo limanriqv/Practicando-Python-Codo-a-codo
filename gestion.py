@@ -5,7 +5,7 @@ def obtenerTrabajadores(nombreArchivo):
     archivo = open(nombreArchivo,"r")
   except FileNotFoundError:
     archivo = open(nombreArchivo,"a")
-    archivo.write("Enzo,12,3223233232,Gamer,True")   ###ver revisar
+    archivo.write("Esteban,18,33333333,Gamer,True")   ###ver revisar
     archivo.close()
     archivo = open(nombreArchivo,"r")
 
@@ -30,7 +30,7 @@ def agregarTrabajador(listado):
   edad = validarIngresoEntero("Edad: ")
   dni = validarIngresoEntero("DNI: ")
   profesion=input("Profesión: ")
-  activo = input("Activo: True o False")
+  activo = input("Activo: True o False: ")
   
   trabajador = {"nombre":nombre,"edad":edad, "dni":dni, "profesion":profesion, "activo":activo}
   listado.append(trabajador)
@@ -63,8 +63,29 @@ def modificarTrabajador(listado,dni):
       trabajador["dni"]= dni
       trabajador["Profesion"]=profesion
       trabajador["Activo"]=activo
+      break
+  
+
+###
+# 
+def eliminarTrabajador(listado,dni):
+  indice=0
+  for trabajador in listado:
+    if trabajador["dni"] == dni:
+      print(trabajador)
+      listado.pop(indice)
+      break
+    indice = indice + 1
+
+  # Eliminar al trabajador en el archivo
+  print(listado)
+  trabajadores = open("trabajadores.dat","w")
+  contenido=[]
+  for trabajador in listado:
+    linea = f"\n{trabajador['nombre']},{trabajador['edad']},{trabajador['dni']},{trabajador['profesion']},{trabajador['activo']}"  
+    contenido.append(linea)
+  contenido[0] = contenido[0].replace("\n","")
+
+  trabajadores.writelines(contenido) # ["","",""]
+  trabajadores.close()
       
-    
-
-
- 

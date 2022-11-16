@@ -1,4 +1,4 @@
-from gestion import obtenerTrabajadores, agregarTrabajadorEnArchivo,agregarTrabajador,modificarTrabajador
+from gestion import obtenerTrabajadores, agregarTrabajadorEnArchivo,agregarTrabajador,modificarTrabajador,eliminarTrabajador
 from generales import validarIngresoEntero
 
 listadoTrabajadores = obtenerTrabajadores("trabajadores.dat")
@@ -35,13 +35,17 @@ while True:
         elif opciones1 == 1:
             print("Agregar")
             agregarTrabajador(listadoTrabajadores)
+
         elif opciones1 == 2:
             print("Modificar")
-            modificarTrabajador(listadoTrabajadores,3223233232)
+            dni = int(input("Ingresa el dni del trabajador a modificar: "))
+            modificarTrabajador(listadoTrabajadores,dni)
+            
         elif opciones1 == 3:
             print("Eliminar")
-        else:
-            print("Elija una opcion correcta")
+            dni= int(input("Ingresa el dni del trabajador a modificar: "))
+            eliminarTrabajador(listadoTrabajadores,dni)
+           
 
         print(listadoTrabajadores)
 
