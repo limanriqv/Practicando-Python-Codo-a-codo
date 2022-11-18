@@ -5,7 +5,7 @@ def obtenerTrabajadores(nombreArchivo):
     archivo = open(nombreArchivo,"r")
   except FileNotFoundError:
     archivo = open(nombreArchivo,"a")
-    archivo.write("Esteban,18,33333333,Gamer,True")   ###ver revisar
+    archivo.write("xxx,11,111111,xxxxxx,xxxx")   ###ver revisar
     archivo.close()
     archivo = open(nombreArchivo,"r")
 
@@ -13,7 +13,7 @@ def obtenerTrabajadores(nombreArchivo):
   for linea in archivo.readlines():
     trabajador=linea.replace('\n','')
     trabajador=trabajador.split(",")
-    trabajador= {"nombre":trabajador[0],"edad":int(trabajador[1]),"dni":int(trabajador[2]),"profesion":trabajador[3],"activo":bool(trabajador[4])}
+    trabajador= {"nombre":trabajador[0],"edad":int(trabajador[1]),"dni":int(trabajador[2]),"profesion":trabajador[3],"activo":trabajador[4]}
     trabajadores.append(trabajador)
   archivo.close()
   return trabajadores
@@ -31,16 +31,15 @@ def agregarTrabajador(listado):
   dni = validarIngresoEntero("DNI: ")
   profesion=input("Profesión: ")
   activo = input("Activo: True o False: ")
-  
   trabajador = {"nombre":nombre,"edad":edad, "dni":dni, "profesion":profesion, "activo":activo}
   listado.append(trabajador)
   agregarTrabajadorEnArchivo("trabajadores.dat",trabajador)
 
+############################################
 
 def modificarTrabajador(listado,dni):
   for trabajador in listado:
     if trabajador["dni"] == dni:
-      print(trabajador)
       nombre = input("Nombre(Presione enter para no modificar) ")
       if nombre == '':
         nombre=trabajador["nombre"]
@@ -61,24 +60,33 @@ def modificarTrabajador(listado,dni):
       trabajador["nombre"] = nombre
       trabajador["edad"] = edad
       trabajador["dni"]= dni
-      trabajador["Profesion"]=profesion
-      trabajador["Activo"]=activo
+      trabajador["profesion"]=profesion
+      trabajador["activo"]=activo
       break
+
+
+      # Modificar el trabajador del listado con los nuevos datos
+  file = open("trabajadores.dat","w")
+  contenido=[]
+  for trabajadores in listado:
+    linea = f"\n{trabajador['nombre']},{trabajador['edad']},{trabajador['dni']},{trabajador['profesion']},{trabajador['activo']}"
+    contenido.append(linea)
+  contenido[0] = contenido[0].replace("\n","")
+  file.writelines(contenido)
+  file.close()
   
 
-###
-# 
+
+#### 
 def eliminarTrabajador(listado,dni):
   indice=0
   for trabajador in listado:
     if trabajador["dni"] == dni:
-      print(trabajador)
       listado.pop(indice)
       break
     indice = indice + 1
 
   # Eliminar al trabajador en el archivo
-  print(listado)
   trabajadores = open("trabajadores.dat","w")
   contenido=[]
   for trabajador in listado:
@@ -89,3 +97,51 @@ def eliminarTrabajador(listado,dni):
   trabajadores.writelines(contenido) # ["","",""]
   trabajadores.close()
       
+
+#####REPORTES
+#########################
+# Mostrar trabajadores activos
+
+def mostrarTrabajadorActivo(listado):
+  for t in listado:
+    if t["activo"]=="True":
+      print(t)
+
+
+###########################
+# Mostrar trabajadores desocupados")
+def mostrarTrabajadorDesocupados(listado):
+  for t in listado:
+    if t["activo"]=="False":
+      print(t)
+
+
+########################
+# Mostrar desocupados en un rango de edad
+def mostrarTDesocupadosUnRangoEdad(listado,edad1,edad2):
+  edadRango = list(range(edad1,edad2+1)) 
+  for t in listado:
+    for num in edadRango:
+      if num==t["edad"] and t["activo"]=="False":
+          print(t)
+  else:
+    print("Ingresa una opcion valida")
+
+
+#############################
+#Mostrar trabajadores segun la profesion
+def mostrarTrabajadoresSegunProfesion(listado,profesion):
+  for t in listado:
+    if t["profesion"]==profesion:
+      print(t)
+            
+
+
+##########################
+def cambiarStatusTrabajadores(listado,dni):         
+  for t in listado:
+    if t["dni"] == dni:
+      if t["activo"]=="False":
+        t["activo"]=="True"
+      else:
+        t["activo"]=="False"
