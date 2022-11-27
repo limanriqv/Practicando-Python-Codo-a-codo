@@ -5,7 +5,7 @@ def obtenerTrabajadores(nombreArchivo):
     archivo = open(nombreArchivo,"r")
   except FileNotFoundError:
     archivo = open(nombreArchivo,"a")
-    archivo.write("xxx,11,111111,xxxxxx,xxxx")   ###ver revisar
+    archivo.write("xxx,11,111111,xxxxxx,xxxx")   
     archivo.close()
     archivo = open(nombreArchivo,"r")
 
@@ -68,7 +68,7 @@ def modificarTrabajador(listado,dni):
       # Modificar el trabajador del listado con los nuevos datos
   file = open("trabajadores.dat","w")
   contenido=[]
-  for trabajadores in listado:
+  for trabajador in listado:
     linea = f"\n{trabajador['nombre']},{trabajador['edad']},{trabajador['dni']},{trabajador['profesion']},{trabajador['activo']}"
     contenido.append(linea)
   contenido[0] = contenido[0].replace("\n","")
@@ -142,6 +142,21 @@ def cambiarStatusTrabajadores(listado,dni):
   for t in listado:
     if t["dni"] == dni:
       if t["activo"]=="False":
-        t["activo"]=="True"
+        t["activo"]="True"
       else:
-        t["activo"]=="False"
+        t["activo"]="False"
+  
+  print (listado)
+
+  file = open("trabajadores.dat","w")
+  contenido=[]
+  for trabajador in listado:
+    linea = f"\n{trabajador['nombre']},{trabajador['edad']},{trabajador['dni']},{trabajador['profesion']},{trabajador['activo']}"
+    contenido.append(linea)
+  contenido[0] = contenido[0].replace("\n","")
+  file.writelines(contenido)
+  file.close()
+
+
+
+  

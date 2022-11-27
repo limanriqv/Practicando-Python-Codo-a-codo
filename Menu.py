@@ -37,15 +37,22 @@ while True:
             print("Agregar")
             agregarTrabajador(listadoTrabajadores)
 
+        
+
+
         elif opciones1 == 2:
             print("Modificar")
             dni = int(input("Ingresa el dni del trabajador a modificar: "))
             modificarTrabajador(listadoTrabajadores, dni)
+
+            
             
         elif opciones1 == 3:
             print("Eliminar")
             dni= int(input("Ingresa el dni del trabajador a eliminarr: "))
             eliminarTrabajador(listadoTrabajadores,dni)
+
+            
 
             
   elif opcion == 2:
@@ -68,9 +75,13 @@ while True:
             print("Mostrar trabajadores activos")
             mostrarTrabajadorActivo(listadoTrabajadores)
 
+        
+
         elif opciones1 == 2:
             print("Mostrar trabajadores desocupados")
             mostrarTrabajadorDesocupados(listadoTrabajadores)
+
+         
 
         elif opciones1 == 3:
             print("Mostrar desocupados en un rango de edad")
@@ -78,6 +89,7 @@ while True:
             edad1 = int(input("Ingrese edad desde: "))
             edad2 = int(input("Ingrese edad hasta: "))
             mostrarTDesocupadosUnRangoEdad(listadoTrabajadores,edad1,edad2)
+
 
         elif opciones1 == 4:
             print("Mostrar trabajadores segun la profesion")
